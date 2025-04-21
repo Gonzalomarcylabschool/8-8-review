@@ -1,29 +1,29 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
-import { getAllFellows, createFellow } from '../adapters/fellowAdapters';
+import { getAllCars, createCar } from '../adapters/fellowAdapters';
 
 const Home = () => {
   // Get all fellows from the serverstate
-  const [fellows, setFellows] = useState([]);
+  const [cars, setCars] = useState([]);
   // form input state
-  const [newFellowName, setNewFellowName] = useState('');
+  const [newCar, setNewCarName] = useState('');
   // form submission response state
-  const [newlyAddedFellow, setNewlyAddedFellow] = useState({})
+  const [newlyAddedCar, setNewlyAddedCar] = useState({})
 
   // Get me the most up to date full list of fellows
   useEffect(() => {
     const doFetch = async () => {
-      const [allFellows, error] = await getAllFellows()
-      setFellows(allFellows);
+      const [allFellows, error] = await getAllCars()
+      setCars(allFellows);
     }
     doFetch();
-  }, [newlyAddedFellow])
+  }, [newlyAddedCar])
 
   // Use the form data to create a POST request to create a new fellow
   const handleCreateFellow = async (e) => {
     e.preventDefault();
-    const [newFellow, error] = await createFellow(newFellowName)
-    setNewlyAddedFellow(newFellow);
+    const [newCar, error] = await createCar(newFellowName)
+    setNewlyAddedFellow(newCar);
     setNewFellowName('');
   }
 
@@ -31,6 +31,7 @@ const Home = () => {
     <>
       <h1>Home</h1>
       <form onSubmit={handleCreateFellow}>
+        <h2>Add Fellow</h2>
         <label htmlFor="name">Add A New Fellow</label>
         <input type="text" name="name" id="name" value={newFellowName} onChange={(e) => setNewFellowName(e.target.value)} />
         <button type="submit">Submit</button>

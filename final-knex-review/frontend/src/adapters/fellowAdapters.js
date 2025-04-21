@@ -1,41 +1,41 @@
 import handleFetch from "./handleFetch"
 
-export const getAllFellows = async () => {
-  const [allFellows, error] = await handleFetch('/api/fellows/')
-  return [allFellows, error];
+export const getAllCars = async () => {
+  const [allCars, error] = await handleFetch('/api/cars/')
+  return [allCars, error];
 }
 
-export const getFellowById = async (id) => {
-  const [fellow, error] = await handleFetch(`/api/fellows/${id}`);
-  return [fellow, error];
+export const getCarById = async (id) => {
+  const [car, error] = await handleFetch(`/api/cars/${id}`);
+  return [car, error];
 }
 
-export const createFellow = async (fellowName) => {
+export const createCar = async (CarMake, carModel, carYear ) => {
   const options = {
     method: "POST",
     headers: { "Content-type": "application/json" },
-    body: JSON.stringify({ fellowName })
+    body: JSON.stringify({ CarMake, carModel, carYear })
   }
 
-  const [newFellow, error] = await handleFetch(`/api/fellows/`, options);
-  return [newFellow, error];
+  const [newCar, error] = await handleFetch(`/api/cars/`, options);
+  return [newCar, error];
 }
 
-export const deleteFellow = async (id) => {
+export const deleteCar = async (id) => {
   const options = {
     method: "DELETE",
   };
-  const [success, error] = await handleFetch(`/api/fellows/${id}`, options);
+  const [success, error] = await handleFetch(`/api/cars/${id}`, options);
   return [success, error];
 }
 
-export const updateFellowName = async (id, fellowName) => {
+export const updateCarModel = async (id, fellowModel) => {
   const options = {
     method: "PATCH",
     headers: { "Content-type": "application/json" },
-    body: JSON.stringify({ fellowName })
+    body: JSON.stringify({ fellowModel })
   };
 
-  const [updatedFellow, error] = await handleFetch(`/api/fellows/${id}`, options);
-  return [updatedFellow, error];
+  const [updatedCar, error] = await handleFetch(`/api/cars/${id}`, options);
+  return [updatedCar, error];
 }
